@@ -53,21 +53,21 @@ def main():
             # Проверка обязательных полей
             while True:
                 name = input("Введите название сервиса: ").strip()
-                if name:
+                if len(name) >= 3:
                     break
-                print("Ошибка! Название сервиса не может быть пустым.")
+                print("Ошибка! Название сервиса должно быть не менее 3 символов.")
 
             while True:
                 username = input("Введите логин: ").strip()
-                if username:
+                if len(username) >= 3:
                     break
-                print("Ошибка! Логин не может быть пустым.")
+                print("Ошибка! Логин должен быть не менее 3 символов.")
 
             while True:
                 password = input("Введите пароль: ").strip()
-                if password:
+                if len(password) >= 3:
                     break
-                print("Ошибка! Пароль не может быть пустым.")
+                print("Ошибка! Пароль должен быть не менее 3 символов.")
 
             try:
                 manager.add_password(pass_id, name, username, password)  # Добавление пароля
@@ -84,10 +84,13 @@ def main():
                     break
                 except ValueError:
                     print("Ошибка ввода ID! Пожалуйста, введите число.")
-            manager.find_password(pass_id)  # Поиск пароля по ID
+
+            result = manager.find_password(pass_id)  # Поиск пароля по ID
+            if result:  # Если пароль найден, вывести его
+                print(result)
 
         elif oper == 4:
-            # Проверка ID
+            # Проверка ID для изменения пароля
             while True:
                 try:
                     pass_id = int(input("Введите ID для изменения пароля: "))
@@ -98,29 +101,27 @@ def main():
             # Проверка обязательных полей
             while True:
                 new_name = input("Введите новое название сервиса: ").strip()
-                if new_name:
+                if new_name and len(new_name) >= 3:
                     break
-                print("Ошибка! Название сервиса не может быть пустым.")
+                print("Ошибка! Название сервиса должно быть не менее 3 символов.")
 
             while True:
                 new_username = input("Введите новый логин: ").strip()
-                if new_username:
+                if new_username and len(new_username) >= 3:
                     break
-                print("Ошибка! Логин не может быть пустым.")
+                print("Ошибка! Логин должен быть не менее 3 символов.")
 
             while True:
                 new_password = input("Введите новый пароль: ").strip()
-                if new_password:
+                if new_password and len(new_password) >= 3:
                     break
-                print("Ошибка! Пароль не может быть пустым.")
+                print("Ошибка! Пароль должен быть не менее 3 символов.")
 
-            try:
-                manager.change_password(pass_id, new_name, new_username, new_password)  # Изменение пароля
-            except Exception as e:
-                print(e)
+            # Попытка изменить пароль
+            manager.change_password(pass_id, new_name, new_username, new_password)  # Изменение пароля
 
         elif oper == 5:
-            # Проверка ID
+            # Проверка ID для удаления пароля
             while True:
                 try:
                     pass_id = int(input("Введите ID для удаления пароля: "))
