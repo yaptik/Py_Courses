@@ -14,14 +14,22 @@ class PasswordManager:
         """Поиск записи пароля по ID."""
         if pass_id in self.password_list:
             name, username, password = self.password_list[pass_id]
-            print(f"Сервис: {name}, Логин: {username}, Пароль: {password}")
+            return f"Сервис: {name}, Логин: {username}, Пароль: {password}"  # Возвращаем строку
         else:
-            print("ID не найден!")
+            return None  # Возвращаем None, если ID не найден
 
     def change_password(self, pass_id, new_name, new_username, new_password):
         """Изменение записи пароля."""
         if pass_id in self.password_list:
             self.password_list[pass_id] = (new_name, new_username, new_password)
+        else:
+            print("ID не найден!")
+
+    def delete_password(self, pass_id):
+        """Удаление записи пароля по ID."""
+        if pass_id in self.password_list:
+            del self.password_list[pass_id]
+            print(f"Пароль с ID {pass_id} был удален.")
         else:
             print("ID не найден!")
 
